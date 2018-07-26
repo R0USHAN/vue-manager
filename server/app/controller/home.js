@@ -4,14 +4,19 @@ const Controller = require('egg').Controller;
 
 class HomeController extends Controller {
   async index() {
-    this.ctx.body = {
-      id: '23',
-      name: 'jack',
-      arr: [{
-        name: 'kkk',
-      }],
-    };
-}
+    const result = await this.app.mysql.insert('posts', { title: 'Hello World' });
+    if (result) {
+      this.ctx.body = result;
+    } else {
+      this.ctx.body = {
+        id: '23',
+        name: 'jack',
+        arr: [{
+          name: 'kkk',
+        }],
+      };
+    }
+  }
 
   async login() {
     // this.ctx.header = {
