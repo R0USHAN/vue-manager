@@ -4,7 +4,7 @@ const Controller = require('egg').Controller;
 
 class HomeController extends Controller {
   async index() {
-    const result = await this.app.mysql.insert('test', { math: 'Hello Worldaa' });
+    const result = await this.app.mysql.get('test', { math: 'Hello Worldaa' });
     if (result) {
       this.ctx.body = result;
     } else {
@@ -19,19 +19,18 @@ class HomeController extends Controller {
   }
 
   async login() {
-    // this.ctx.header = {
-    //     'Access-Control-Allow-Origin' : '*'
-    // };
-    // this.ctx.set({
-    //     'Access-Control-Allow-Origin' : '*'
-    // })
-    this.ctx.body = {
-      id: '23',
-      name: 'jack',
-      arr: [{
-        name: 'kkk',
-      }],
-    };
+    const result = await this.app.mysql.query('select * from test')
+    if (result) {
+        this.ctx.body = result;
+    } else {
+        this.ctx.body = {
+            id: '23',
+            name: 'jack',
+            arr: [{
+            name: 'kkk',
+            }],
+        };
+    }
   }
 }
 

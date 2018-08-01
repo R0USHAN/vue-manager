@@ -1,4 +1,5 @@
 'use strict';
+const path = require('path')
 
 module.exports = appInfo => {
   const config = {};
@@ -8,7 +9,7 @@ module.exports = appInfo => {
    * @member Config#test
    * @property {String} key - some description
    */
-  config.middleware = [ 'time', 'time2' ];
+//   config.middleware = [ 'time', 'time2' ];
   config.test = {
     key: appInfo.name + '_123456',
   };
@@ -26,13 +27,17 @@ module.exports = appInfo => {
       // 密码
       password: 'wzs123..',
       // 数据库名
-      database: 'test',
+      database: 'payment',
     },
     // 是否加载到 app 上，默认开启
     app: true,
     // 是否加载到 agent 上，默认关闭
     agent: false,
   };
+
+  config.static = {
+      dir: path.join(appInfo.baseDir, 'app/public')
+  }
 
   return config;
 };
